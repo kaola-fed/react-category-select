@@ -1,10 +1,14 @@
-# react-category-select [![NPM version][npm-image]][npm-url] 
+# react-category-select
 React component for category select
+
+[![NPM version][npm-image]][npm-url]
 
 ## Usage
 
  - `npm i react-category-select -S`
  - See `example/index.js` for example
+
+![](https://cdn.int64ago.org/lj1n5q38m1unmk3oo8byb9.png)
 
 ## Development
 

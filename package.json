@@ -1,6 +1,6 @@
 {
   "name": "react-category-select",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component for category select",
   "main": "index.js",
   "files": [
