@@ -1,4 +1,4 @@
-# react-category-select
+# react-category-select [![NPM version][npm-image]][npm-url] 
 React component for category select
 
 ## Usage
@@ -10,3 +10,10 @@ React component for category select
 
  - `npm i`
  - `npm run dev`
+
+ 
+  [npm-url]: https://npmjs.org/package/react-category-select
+  [npm-image]: https://img.shields.io/npm/v/react-category-select.svg
+
+## LICENSE
+MIT
