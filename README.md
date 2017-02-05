@@ -8,7 +8,7 @@ React component for category select
  - `npm i react-category-select -S`
  - See `example/index.js` for example
 
-![](https://cdn.int64ago.org/lj1n5q38m1unmk3oo8byb9.png)
+![](https://cloud.githubusercontent.com/assets/2230882/22627357/9c233314-ebfc-11e6-83f2-a419654b611d.png)
 
 ## Development
 
