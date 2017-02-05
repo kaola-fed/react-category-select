@@ -1,13 +1,14 @@
 {
   "name": "react-category-select",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React component for category select",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
     "assets",
-    "index.js"
+    "dist"
   ],
   "scripts": {
+    "build": "babel src -d dist",
     "dev": "webpack-dev-server --progress --profile --colors"
   },
   "repository": {
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/kaola-fed/react-category-select#readme",
   "devDependencies": {
+    "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.22.0",

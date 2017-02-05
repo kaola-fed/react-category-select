@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const CategorySelect = require('../index');
+const CategorySelect = require('../src/index');
 
 require('../assets/index.css');
 
