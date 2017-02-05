@@ -4,7 +4,6 @@ var CategorySelect = React.createClass({
   getInitialState: function() {
     return {
       show: false,
-      selected: this.props.selected,
       childCateList: null,
     }
   },
@@ -29,7 +28,7 @@ var CategorySelect = React.createClass({
   },
 
   _getSelectedName: function() {
-    var selected = this.state.selected;
+    var selected = this.props.selected;
     var selectedName = this.props.defaultName || '全部类目';
     if (!selected) return selectedName;
     var idKey = this.props.idKey || 'cateId';
