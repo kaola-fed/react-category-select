@@ -1,47 +1,50 @@
-var React = require('react');
+const React = require('react');
 
-var CategorySelect = React.createClass({
-  getInitialState: function() {
-    return {
+class CategorySelect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       show: false,
       childCateList: null,
     }
-  },
+  }
 
-  onChange: function(category) {
-    var idKey = this.props.idKey || 'cateId';
-    var onChange = this.props.onChange;
+  onChange(category) {
+    const { idKey, onChange } = this.props;
     onChange && onChange(category[idKey]);
-    this._toggleShow(true);
-  },
+    this.toggleShow(true);
+  }
 
-  _toggleShow: function(forceHide) {
-    var show = !this.state.show;
-    if (forceHide) show = false;
-    this.setState({ show: show, childCateList: null });
-  },
+  toggleShow(forceHide = false) {
+    let { show } = this.state;
+    show = forceHide ? false : !show;
+    this.setState({ show, childCateList: null }); 
+  }
 
-  _collapse: function(category, e) {
+  collapse(category, e) {
     e.stopPropagation();
-    var childName = this.props.childName || 'cateList';
+    const { childName } = this.props;
     this.setState({ childCateList: category[childName] });
-  },
+  }
 
-  _getSelectedName: function() {
-    var selected = this.props.selected;
-    var selectedName = this.props.defaultName || '全部类目';
+  getSelectedName() {
+    const {
+      selected,
+      defaultName,
+      idKey,
+      nameKey,
+      childName,
+      categories,
+    } = this.props;
+    let selectedName = defaultName;
     if (!selected) return selectedName;
-    var idKey = this.props.idKey || 'cateId';
-    var nameKey = this.props.cateName || 'cateName';
-    var childName = this.props.childName || 'cateList';
-    var categories = this.props.categories || [];
-    categories.forEach(function(category) {
+    categories.forEach(category => {
       if (category[idKey] / 1 === selected / 1) {
         selectedName = category[nameKey];
         return;
       }
       if (category[childName]) {
-        category[childName].forEach(function(category2) {
+        category[childName].forEach(category2 => {
           if (category2[idKey] / 1 === selected / 1) {
             selectedName = category2[nameKey];
             return;
@@ -50,19 +53,15 @@ var CategorySelect = React.createClass({
       }
     });
     return selectedName;
-  },
+  }
 
-  render: function() {
-    var categories = this.props.categories;
-    var childCateList = this.state.childCateList;
-    var idKey = this.props.idKey || 'cateId';
-    var nameKey = this.props.cateName || 'cateName';
-    var childName = this.props.childName || 'cateList';
-    var show = this.state.show;
+  render() {
+    const { childCateList, show } = this.state;
+    const { categories, idKey, nameKey, childName } = this.props;
     return (
       <div className="u-category-dropdown">
-        <div className="dropdown_hd" onClick={this._toggleShow.bind(this, false)}>
-          <a className="u-category-btn">{this._getSelectedName()}<span className="u-category-arrow"></span></a>
+        <div className="dropdown_hd" onClick={this.toggleShow.bind(this, false)}>
+          <a className="u-category-btn">{this.getSelectedName()}<span className="u-category-arrow"></span></a>
         </div>
         {show ?
         <div
@@ -70,19 +69,19 @@ var CategorySelect = React.createClass({
           >
           <ul className="m-category-listview">
           {
-            categories.map(function(category) {
+            categories.map(category => {
               return (
                 <li onClick={this.onChange.bind(this, category)}>
                   <span>{category[nameKey]}</span>
                   {category[childName] ?
                   <span
                     className="u-category-collapse"
-                    onClick={this._collapse.bind(this, category)}
+                    onClick={this.collapse.bind(this, category)}
                   >展开</span> : ''
                   }
                 </li>
               )
-            }.bind(this))
+            })
           }
           </ul>
         </div> : ''
@@ -93,13 +92,13 @@ var CategorySelect = React.createClass({
           >
           <ul className="m-category-listview">
           {
-            (childCateList || []).map(function(category) {
+            (childCateList || []).map(category => {
               return (
                 <li onClick={this.onChange.bind(this, category)}>
                   <span>{category[nameKey]}</span>
                 </li>
               )
-            }.bind(this))
+            })
           }
           </ul>
         </div> : ''
@@ -107,6 +106,14 @@ var CategorySelect = React.createClass({
       </div>
     )
   }
-});
+}
+
+CategorySelect.defaultProps = {
+  idKey: 'cateId',
+  nameKey: 'cateName',
+  childName: 'cateList',
+  defaultName: '全部类目',
+  categories: [],
+}
 
 module.exports = CategorySelect;

@@ -20,9 +20,7 @@ const categories = [
   { cateId: 105, cateName: '测试105' },
 ];
 
-const onChange = function(id) {
-  console.log('Select: ' + id);
-}
+const onChange = id => console.log(`Select: ${id}`);
 
 ReactDOM.render(
   <div>
