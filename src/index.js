@@ -11,6 +11,16 @@ class CategorySelect extends React.Component {
     }
   }
 
+  componentDidMount() {
+    window.addEventListener('mousedown', this.onMouseDown.bind(this), false);
+  }
+
+  onMouseDown(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.toggleShow(true);
+    }
+  }
+
   onChange(category) {
     const { idKey, onChange } = this.props;
     onChange && onChange(category[idKey]);
@@ -61,7 +71,7 @@ class CategorySelect extends React.Component {
     const { categories, childCateList, show } = this.state;
     const { idKey, nameKey, childName } = this.props;
     return (
-      <div className="u-category-dropdown">
+      <div className="u-category-dropdown" ref={(node) => (this.wrapperRef = node)}>
         <div className="dropdown_hd" onClick={this.toggleShow.bind(this, false)}>
           <a className="u-category-btn">{this.getSelectedName()}<span className="u-category-arrow"></span></a>
         </div>
