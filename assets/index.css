@@ -24,7 +24,7 @@
   position: absolute;
   background-color: #fff;
   z-index: 1;
-  width: 200px;
+  width: 150px;
   top: 100%;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .dropdown_bd.dropdown_bd-2 {
-  left: 200px;
+  left: 150px;
 }
 
 .u-category-arrow {
