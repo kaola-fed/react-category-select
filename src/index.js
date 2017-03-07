@@ -3,11 +3,9 @@ const React = require('react');
 class CategorySelect extends React.Component {
   constructor(props) {
     super(props);
-    const defaultCate = { [props.idKey]: '', [props.nameKey]: props.defaultName };
     this.state = {
       show: false,
       childCateList: null,
-      categories: [ defaultCate ,...props.categories],
     }
   }
 
@@ -46,11 +44,12 @@ class CategorySelect extends React.Component {
       idKey,
       nameKey,
       childName,
+      categories,
     } = this.props;
 
     let selectedName = defaultName;
     if (!selected) return selectedName;
-    this.state.categories.forEach(category => {
+    categories.forEach(category => {
       if (category[idKey] / 1 === selected / 1) {
         selectedName = category[nameKey];
         return;
@@ -68,8 +67,12 @@ class CategorySelect extends React.Component {
   }
 
   render() {
-    const { categories, childCateList, show } = this.state;
-    const { idKey, nameKey, childName } = this.props;
+    const { childCateList, show } = this.state;
+    const { categories, idKey, nameKey, childName, defaultName } = this.props;
+
+    const defaultCate = { [idKey]: '', [nameKey]: defaultName };
+    const _categories = [ defaultCate ,...categories];
+
     return (
       <div className="u-category-dropdown" ref={(node) => (this.wrapperRef = node)}>
         <div className="dropdown_hd" onClick={this.toggleShow.bind(this, false)}>
@@ -81,7 +84,7 @@ class CategorySelect extends React.Component {
           >
           <ul className="m-category-listview">
           {
-            categories.map(category => {
+            _categories.map(category => {
               return (
                 <li onClick={this.onChange.bind(this, category)}>
                   <span>{category[nameKey]}</span>
