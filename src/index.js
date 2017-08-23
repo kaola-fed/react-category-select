@@ -28,7 +28,7 @@ class CategorySelect extends React.Component {
   toggleShow(forceHide = false) {
     let { show } = this.state;
     show = forceHide ? false : !show;
-    this.setState({ show, childCateList: null }); 
+    this.setState({ show, childCateList: null });
   }
 
   collapse(category, e) {
@@ -66,12 +66,21 @@ class CategorySelect extends React.Component {
     return selectedName;
   }
 
+  // Get a random integer between `min` and `max`.
+  // Reference: https://gist.github.com/kerimdzhanov/7529623
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   render() {
     const { childCateList, show } = this.state;
     const { categories, idKey, nameKey, childName, defaultName } = this.props;
 
     const defaultCate = { [idKey]: '', [nameKey]: defaultName };
     const _categories = [ defaultCate ,...categories];
+
+    const smallInt = 1;
+    const largeInt = 1000;
 
     return (
       <div className="u-category-dropdown" ref={(node) => (this.wrapperRef = node)}>
@@ -86,7 +95,7 @@ class CategorySelect extends React.Component {
           {
             _categories.map(category => {
               return (
-                <li onClick={this.onChange.bind(this, category)}>
+                <li key={this.getRandomInt(smallInt, largeInt)} onClick={this.onChange.bind(this, category)}>
                   <span>{category[nameKey]}</span>
                   {category[childName] ?
                   <span
@@ -109,7 +118,7 @@ class CategorySelect extends React.Component {
           {
             (childCateList || []).map(category => {
               return (
-                <li onClick={this.onChange.bind(this, category)}>
+                <li key={this.getRandomInt(smallInt, largeInt)} onClick={this.onChange.bind(this, category)}>
                   <span>{category[nameKey]}</span>
                 </li>
               )
