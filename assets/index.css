@@ -25,6 +25,8 @@
   background-color: #fff;
   z-index: 1;
   width: 150px;
+  height: 150px;
+  overflow-y: scroll;
   top: 100%;
 }
 
@@ -46,6 +48,8 @@
 
 .dropdown_bd.dropdown_bd-2 {
   left: 150px;
+  height: 150px;
+  overflow-y: scroll;
 }
 
 .u-category-arrow {
